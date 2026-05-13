@@ -8,8 +8,7 @@
 - **Foto**:<img width="150" height="200" alt="awua" src="https://github.com/user-attachments/assets/90318cc7-d603-4e7d-bc99-4add8723d4e9" />
 
 ### Integrante 2:
-- **Nombre**: Jaime A![Uploading awua.jpg…]()
-lberto Espinoza Martínez
+- **Nombre**: Jaime Alberto Espinoza Martínez
 - **Edad**: 17
 - **Grado y grupo**: 6D
 - **Numero de control**: 23308060610540
