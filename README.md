@@ -1,4 +1,4 @@
-
+# Informacion personal de los creadores
 # Propósito del proyecto
 
 El proyecto **“No estoy aquí”** tiene como propósito desarrollar una aplicación interactiva con enfoque narrativo y psicológico, utilizando Python y el framework Flet, que permita al usuario explorar diferentes escenarios relacionados con sueños, recuerdos y la percepción de la identidad. La aplicación busca ofrecer una experiencia inmersiva mediante la interacción con distintas escenas, diálogos y decisiones que afectan el desarrollo de la historia.
