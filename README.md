@@ -1,4 +1,22 @@
 # Informacion personal de los creadores
+### Integrante 1:
+- **Nombre**: Vazquez Ortiz Wendy Judith
+- **Edad**: 17
+- **Grado y grupo**: 6D
+- **Numero de control**: 23308060610440
+- **Correo Electronico**: 23308060610440@cetis61.edu.mx
+- **Foto**:<img width="150" height="200" alt="awua" src="https://github.com/user-attachments/assets/90318cc7-d603-4e7d-bc99-4add8723d4e9" />
+
+### Integrante 2:
+- **Nombre**: Jaime A![Uploading awua.jpg…]()
+lberto Espinoza Martínez
+- **Edad**: 17
+- **Grado y grupo**: 6D
+- **Numero de control**: 23308060610540
+- **Correo Electronico**: 23308060610540@cetis61.edu.mx
+- **Foto**: <img width="200" height="220" alt="bebeto" src="https://github.com/user-attachments/assets/8a4dca21-bc63-46c8-8504-515aaff666e0" />
+
+
 # Propósito del proyecto
 
 El proyecto **“No estoy aquí”** tiene como propósito desarrollar una aplicación interactiva con enfoque narrativo y psicológico, utilizando Python y el framework Flet, que permita al usuario explorar diferentes escenarios relacionados con sueños, recuerdos y la percepción de la identidad. La aplicación busca ofrecer una experiencia inmersiva mediante la interacción con distintas escenas, diálogos y decisiones que afectan el desarrollo de la historia.
