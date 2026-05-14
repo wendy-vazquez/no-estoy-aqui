@@ -11,4 +11,5 @@ dependencies = [
     "mysql-connector-python>=9.7.0",
     "pillow>=12.2.0",
     "pygame>=2.6.1",
+    "secure-smtplib>=0.1.1",
 ]

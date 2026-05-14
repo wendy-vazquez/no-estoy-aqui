@@ -241,6 +241,7 @@ dependencies = [
     { name = "mysql-connector-python" },
     { name = "pillow" },
     { name = "pygame" },
+    { name = "secure-smtplib" },
 ]
 
 [package.metadata]
@@ -251,6 +252,7 @@ requires-dist = [
     { name = "mysql-connector-python", specifier = ">=9.7.0" },
     { name = "pillow", specifier = ">=12.2.0" },
     { name = "pygame", specifier = ">=2.6.1" },
+    { name = "secure-smtplib", specifier = ">=0.1.1" },
 ]
 
 [[package]]
@@ -363,6 +365,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/65/e1/824989291d0f01886074fdf9504ba54598f5665bc4dd373b589b87e76608/repath-0.9.0.tar.gz", hash = "sha256:8292139bac6a0e43fd9d70605d4e8daeb25d46672e484ed31a24c7ce0aef0fb7", size = 5492, upload-time = "2019-10-08T00:25:22.3Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/87/ed/92e9b8a3ffc562f21df14ef2538f54e911df29730e1f0d79130a4edc86e7/repath-0.9.0-py3-none-any.whl", hash = "sha256:ee079d6c91faeb843274d22d8f786094ee01316ecfe293a1eb6546312bb6a318", size = 4738, upload-time = "2019-10-08T00:25:20.842Z" },
+]
+
+[[package]]
+name = "secure-smtplib"
+version = "0.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/1f/86/30df3f748dd43c064bed3059f116a32adc71622087b1d4eb379e2fb663f7/secure-smtplib-0.1.1.tar.gz", hash = "sha256:3d4903f6612626ccd9b77ef05313cb3c3952a59a4d756cda2377b272fabad8b9", size = 5912, upload-time = "2015-04-07T14:44:42.839Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1c/bd/3c602fbfa16cad120e93e4b0286d89aad0ec2ce163cdf5410a6ce4cadba5/secure_smtplib-0.1.1-py2.py3-none-any.whl", hash = "sha256:645ea0a341f306fa3307c8fe1169765c417ff363db9946fa69f3669a9b718069", size = 3384, upload-time = "2015-04-07T14:44:45.188Z" },
 ]
 
 [[package]]

@@ -134,6 +134,15 @@ class AuthView:
             on_click=lambda e: self.register(e, username, email, password, feedback),
         )
 
+        forgot_btn = ft.TextButton(
+            content=ft.Text("¿Olvidaste tu contraseña?", color="#777777", size=12),
+            on_click=lambda e: [
+                self.page.controls.clear(),
+                self.page.add(__import__('views.ForgotPasswordView', fromlist=['ForgotPasswordView']).ForgotPasswordView(self.page).build()),
+                self.page.update()
+            ],
+        )
+
         back_button = ft.TextButton(
             content=ft.Text("← Volver"),
             on_click=self.back_to_menu,
@@ -167,6 +176,7 @@ class AuthView:
                 ft.Container(height=5),
                 feedback,
                 ft.Container(height=10),
+                forgot_btn,
                 ghost_message,
                 back_button,
             ],
