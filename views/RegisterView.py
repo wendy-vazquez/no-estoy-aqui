@@ -1,28 +1,16 @@
 import flet as ft
-from models.UserModel import login_user
+from models.UserModel import register_user
 
 
-class AuthView:
+class RegisterView:
 
     def __init__(self, page: ft.Page):
         self.page = page
 
-    def back_to_menu(self, e):
-        from views.MenuView import MenuView
+    def go_to_login(self, e):
+        from views.LoginView import AuthView
         self.page.controls.clear()
-        self.page.add(MenuView(self.page, user=None).build())
-        self.page.update()
-
-    def go_to_register(self, e):
-        from views.RegisterView import RegisterView
-        self.page.controls.clear()
-        self.page.add(RegisterView(self.page).build())
-        self.page.update()
-
-    def go_to_forgot(self, e):
-        from views.ForgotPasswordView import ForgotPasswordView
-        self.page.controls.clear()
-        self.page.add(ForgotPasswordView(self.page).build())
+        self.page.add(AuthView(self.page).build())
         self.page.update()
 
     def _enter_game(self, user):
@@ -31,8 +19,18 @@ class AuthView:
         self.page.add(MenuView(self.page, user=user).build())
         self.page.update()
 
-    def login(self, e, email, password, feedback):
-        ok, result = login_user(email.value, password.value)
+    def register(self, e, username, email, password, confirm, feedback):
+        if not username.value or not email.value or not password.value:
+            feedback.color = "#FF4444"
+            feedback.value = "Completa todos los campos."
+            self.page.update()
+            return
+        if password.value != confirm.value:
+            feedback.color = "#FF4444"
+            feedback.value = "Las contraseñas no coinciden."
+            self.page.update()
+            return
+        ok, result = register_user(username.value, email.value, password.value)
         if ok:
             self._enter_game(result)
         else:
@@ -43,7 +41,7 @@ class AuthView:
     def build(self):
 
         title = ft.Text(
-            "¿Quién eres?",
+            "Crear cuenta",
             size=38,
             color="#F2F2F2",
             weight=ft.FontWeight.BOLD,
@@ -52,7 +50,7 @@ class AuthView:
         )
 
         subtitle = ft.Text(
-            "El espejo todavía intenta recordarte.",
+            "El espejo necesita saber tu nombre.",
             size=15,
             italic=True,
             color="#B8B8B8",
@@ -60,8 +58,7 @@ class AuthView:
             text_align=ft.TextAlign.CENTER,
         )
 
-        email = ft.TextField(
-            label="Correo electrónico",
+        field_style = dict(
             width=350,
             border_color="#3A3A3A",
             focused_border_color="#AA00FF",
@@ -71,18 +68,10 @@ class AuthView:
             bgcolor="#11111199",
         )
 
-        password = ft.TextField(
-            label="Contraseña",
-            password=True,
-            can_reveal_password=True,
-            width=350,
-            border_color="#3A3A3A",
-            focused_border_color="#AA00FF",
-            color="white",
-            label_style=ft.TextStyle(color="#AAAAAA"),
-            cursor_color="#FF00FF",
-            bgcolor="#11111199",
-        )
+        username = ft.TextField(label="Nombre de usuario", **field_style)
+        email = ft.TextField(label="Correo electrónico", **field_style)
+        password = ft.TextField(label="Contraseña", password=True, can_reveal_password=True, **field_style)
+        confirm = ft.TextField(label="Confirmar contraseña", password=True, can_reveal_password=True, **field_style)
 
         feedback = ft.Text("", size=13, text_align=ft.TextAlign.CENTER)
 
@@ -95,12 +84,12 @@ class AuthView:
             padding=20,
         )
 
-        login_button = ft.ElevatedButton(
-            content=ft.Text("Iniciar sesión"),
+        register_button = ft.ElevatedButton(
+            content=ft.Text("Registrarse"),
             width=350,
             height=50,
             style=button_style,
-            on_click=lambda e: self.login(e, email, password, feedback),
+            on_click=lambda e: self.register(e, username, email, password, confirm, feedback),
         )
 
         content = ft.Column(
@@ -108,23 +97,17 @@ class AuthView:
                 title,
                 subtitle,
                 ft.Container(height=20),
+                username,
                 email,
                 password,
+                confirm,
                 ft.Container(height=5),
-                login_button,
+                register_button,
                 feedback,
                 ft.Container(height=5),
                 ft.TextButton(
-                    content=ft.Text("¿Olvidaste tu contraseña?", color="#777777", size=12),
-                    on_click=self.go_to_forgot,
-                ),
-                ft.TextButton(
-                    content=ft.Text("¿No tienes cuenta? Regístrate", color="#AA00FF", size=12),
-                    on_click=self.go_to_register,
-                ),
-                ft.TextButton(
-                    content=ft.Text("← Volver al menú", color="#555555", size=12),
-                    on_click=self.back_to_menu,
+                    content=ft.Text("¿Ya tienes cuenta? Inicia sesión", color="#AA00FF", size=12),
+                    on_click=self.go_to_login,
                 ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,

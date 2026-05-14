@@ -34,16 +34,16 @@ def register_user(username, email, password):
         if conn: conn.close()
 
 
-def login_user(username, password):
+def login_user(email, password):
     conn = None
     cursor = None
     try:
         conn = get_connection()
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
         user = cursor.fetchone()
         if not user:
-            return False, "Usuario no encontrado."
+            return False, "No existe una cuenta con ese correo."
         if bcrypt.checkpw(password.encode(), user["password"].encode()):
             return True, user
         return False, "Contraseña incorrecta."
