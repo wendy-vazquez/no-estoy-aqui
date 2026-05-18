@@ -1,5 +1,3 @@
-# views/intro_view.py
-
 import flet as ft
 import time
 import threading
@@ -8,99 +6,65 @@ import threading
 class IntroView:
 
     def __init__(self, page: ft.Page, controller):
-
         self.page = page
         self.controller = controller
 
-    # =================================================
-    # CONTINUAR
-    # =================================================
-
     def continue_game(self, e):
-
         self.controller.go_to_room()
-
-    # =================================================
-    # EFECTO TEXTO
-    # =================================================
-
-    def animate_text(self):
-
-        full_text = (
-            "Despiertas.\n\n"
-            "La habitación está silenciosa.\n\n"
-            "No recuerdas haberte dormido.\n\n"
-            "Pero algo...\n"
-            "se siente diferente."
-        )
-
-        current_text = ""
-
-        for char in full_text:
-
-            current_text += char
-
-            self.story_text.value = current_text
-
-            self.page.update()
-
-            time.sleep(0.03)
-
-    # =================================================
-    # UI
-    # =================================================
 
     def build(self):
 
-        # -------------------------
-        # TEXTO PRINCIPAL
-        # -------------------------
+        lines = [
+            "Despiertas.",
+            "La habitación está silenciosa.",
+            "No recuerdas haberte dormido.",
+            "Pero algo...",
+            "se siente diferente.",
+        ]
 
-        self.story_text = ft.Text(
-            "",
-            size=24,
-            color="#EAEAEA",
-            text_align=ft.TextAlign.CENTER,
-            font_family="subtitulo",
-        )
-
-        # -------------------------
-        # BOTÓN
-        # -------------------------
+        text_controls = [
+            ft.Text(
+                line,
+                size=24,
+                color="#EAEAEA",
+                text_align=ft.TextAlign.CENTER,
+                font_family="subtitulo",
+                opacity=0,
+                animate_opacity=ft.Animation(800, "easeIn"),
+            )
+            for line in lines
+        ]
 
         continue_button = ft.ElevatedButton(
             content=ft.Text("Continuar"),
             width=220,
             height=50,
+            opacity=0,
+            animate_opacity=ft.Animation(800, "easeIn"),
             on_click=self.continue_game,
         )
 
-        # -------------------------
-        # CONTENIDO
-        # -------------------------
-
         content = ft.Column(
             controls=[
-                self.story_text,
+                *text_controls,
                 ft.Container(height=40),
                 continue_button,
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             alignment=ft.MainAxisAlignment.CENTER,
+            spacing=20,
         )
 
-        # -------------------------
-        # ANIMACIÓN TEXTO
-        # -------------------------
+        def reveal_lines():
+            time.sleep(0.3)
+            for ctrl in text_controls:
+                ctrl.opacity = 1
+                self.page.update()
+                time.sleep(1.2)
+            continue_button.opacity = 1
+            self.page.update()
 
-        threading.Thread(
-            target=self.animate_text,
-            daemon=True,
-        ).start()
-
-        # -------------------------
-        # LAYOUT
-        # -------------------------
+        threading.Thread(target=reveal_lines, daemon=True).start()
 
         return ft.Container(
             expand=True,
