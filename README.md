@@ -156,3 +156,12 @@ Asimismo, se validarán:
 - Unicidad de usuarios y correos electrónicos.
 - Obligatoriedad de campos esenciales.
 - Relaciones correctas entre tablas.
+
+# Etapas de entrega del proyecto
+
+## Etapa 1:
+Registro e inicio de sesion para los usuarios.
+## Etapa 2:
+Recuperacion de contraseña/ cambio de contraseña
+## Etapa 3:
+Perfil del usuario,

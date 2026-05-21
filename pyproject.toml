@@ -13,3 +13,15 @@ dependencies = [
     "pygame>=2.6.1",
     "secure-smtplib>=0.1.1",
 ]
+
+[project.scripts]
+# Aqui definimos el comando corto
+# importante: Quitamos el prefijo "src" por que definiremos "src" como la raiz
+app= "main:main"
+
+[tool.uv]
+package = true
+
+# Esta seccion es crucial para que python vea el contenido de src como el nivel raiz
+[tool.setuptools.package-dir]
+""="src"

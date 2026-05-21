@@ -71,9 +71,8 @@ class RoomView:
 
         return ft.Container(
             expand=True,
-            bgcolor="#000000",
             image=ft.DecorationImage(
-                src="img/pantallaInicio.jpg",
+                src="img/room1.jpeg",
                 fit="cover",
                 opacity=0.2,
             ),

@@ -17,10 +17,7 @@ class GameController:
             "mirror_state": "normal",
         }
 
-    # =================================================
     # NAVEGACIÓN
-    # =================================================
-
     def _go_to_menu(self, e):
         self.save_progress()
         from views.MenuView import MenuView
@@ -80,10 +77,7 @@ class GameController:
             ending_type = self._calculate_ending()
         self._navigate(EndingView(page=self.page, controller=self, ending_type=ending_type))
 
-    # =================================================
     # LÓGICA DE FINALES
-    # =================================================
-
     def _calculate_ending(self):
         fear     = self.player_data["fear"]
         nostalgia = self.player_data["nostalgia"]
@@ -100,10 +94,7 @@ class GameController:
             return "curiosity"
         return "neutral"
 
-    # =================================================
     # SISTEMA EMOCIONAL
-    # =================================================
-
     def add_fear(self, amount=1):
         self.player_data["fear"] += amount
 
@@ -119,10 +110,7 @@ class GameController:
     def set_mirror_state(self, state):
         self.player_data["mirror_state"] = state
 
-    # =================================================
     # GUARDAR PROGRESO EN DB
-    # =================================================
-
     def save_progress(self):
         if not self.user_id:
             return
@@ -186,17 +174,11 @@ class GameController:
             if cursor: cursor.close()
             if conn: conn.close()
 
-    # =================================================
     # OBTENER DATOS
-    # =================================================
-
     def get_player_data(self):
         return self.player_data
 
-    # =================================================
     # REINICIAR JUEGO
-    # =================================================
-
     def reset_game(self):
         self.player_data = {
             "fear": 0,
