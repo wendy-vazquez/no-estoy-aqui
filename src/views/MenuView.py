@@ -232,9 +232,8 @@ class MenuView:
         # LAYOUT FINAL
         return ft.Container(
             expand=True,
-            bgcolor="#000000",
             image=ft.DecorationImage(
-                src="img/pantallaInicio.jpg",
+                src="img/pan.jpg",
                 fit="fitHeight",
                 opacity=0.75,
             ),

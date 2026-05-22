@@ -180,7 +180,7 @@ class ProfileView:
             bgcolor="#000000",
             image=ft.DecorationImage(
                 src="img/pantallaInicio.jpg",
-                fit="fitHeight",
+                fit="cover",
                 opacity=0.2,
             ),
             alignment=ft.Alignment(0, 0),

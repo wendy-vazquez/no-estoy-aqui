@@ -135,7 +135,7 @@ class AuthView:
             expand=True,
             image=ft.DecorationImage(
                 src="img/pantallaInicio.jpg",
-                fit="fitHeight",
+                fit="cover",
                 opacity=0.25,
             ),
             bgcolor="#000000",

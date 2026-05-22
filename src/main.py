@@ -14,8 +14,8 @@ from views.MenuView import MenuView
 
 async def start(page: ft.Page):
     page.title = "No estoy aquí"
-    page.window.width = 1200
-    page.window.height = 700
+    page.window.width = 600
+    page.window.height = 900
     page.theme_mode = ft.ThemeMode.DARK
     page.bgcolor = "#090909"
     page.padding = 0
@@ -31,7 +31,8 @@ async def start(page: ft.Page):
 
 
 def main():
-    ft.app(target=start, assets_dir="assets")
+    assets_path = str(ROOT_DIR / "assets")
+    ft.app(target=start, assets_dir=assets_path)
 
 if __name__ == "__main__":
     main()
