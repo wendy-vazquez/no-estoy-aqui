@@ -117,7 +117,7 @@ class RegisterView:
         return ft.Container(
             expand=True,
             image=ft.DecorationImage(
-                src="img/pantallaInicio.jpg",
+                src="img/pantalla1.jpg",
                 fit="cover",
                 opacity=0.25,
             ),

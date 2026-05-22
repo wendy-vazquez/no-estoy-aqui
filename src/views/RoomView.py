@@ -1,4 +1,5 @@
 import flet as ft
+import asyncio
 
 
 class RoomView:
@@ -24,6 +25,8 @@ class RoomView:
             color="#FFFFFF",
             font_family="titulo",
             text_align=ft.TextAlign.CENTER,
+            opacity=0,
+            animate_opacity=ft.Animation(900, "easeIn"),
         )
 
         description = ft.Text(
@@ -32,12 +35,16 @@ class RoomView:
             color="#CCCCCC",
             text_align=ft.TextAlign.CENTER,
             font_family="subtitulo",
+            opacity=0,
+            animate_opacity=ft.Animation(900, "easeIn"),
         )
 
         mirror_button = ft.ElevatedButton(
             content=ft.Text("Acercarse al espejo"),
             width=280,
             height=50,
+            opacity=0,
+            animate_opacity=ft.Animation(800, "easeIn"),
             on_click=self.go_to_mirror,
         )
 
@@ -45,6 +52,8 @@ class RoomView:
             content=ft.Text("Volver a dormir"),
             width=280,
             height=50,
+            opacity=0,
+            animate_opacity=ft.Animation(800, "easeIn"),
             on_click=self.go_to_dream,
         )
 
@@ -52,6 +61,8 @@ class RoomView:
             content=ft.Text("Intentar salir"),
             width=280,
             height=50,
+            opacity=0,
+            animate_opacity=ft.Animation(800, "easeIn"),
             on_click=self.go_to_ending,
         )
 
@@ -68,6 +79,15 @@ class RoomView:
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             spacing=15,
         )
+
+        async def reveal_room_controls():
+            await asyncio.sleep(0.3)
+            for ctrl in [title, description, mirror_button, sleep_button, leave_button]:
+                ctrl.opacity = 1
+                self.page.update()
+                await asyncio.sleep(0.4)
+
+        self.page.run_task(reveal_room_controls)
 
         return ft.Container(
             expand=True,

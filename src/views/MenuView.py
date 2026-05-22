@@ -233,7 +233,7 @@ class MenuView:
         return ft.Container(
             expand=True,
             image=ft.DecorationImage(
-                src="img/pan.jpg",
+                src="img/pantalla1.jpg",
                 fit="fitHeight",
                 opacity=0.75,
             ),
