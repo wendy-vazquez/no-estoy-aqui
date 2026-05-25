@@ -89,7 +89,7 @@ class RoomView:
         # BOTONES
         mirror_button = ft.ElevatedButton(
             content=ft.Text(
-                "🪞 Acercarse al espejo",
+                "Acercarse al espejo",
                 font_family="btninicio",
                 size=18,
             ),
@@ -104,7 +104,7 @@ class RoomView:
 
         sleep_button = ft.ElevatedButton(
             content=ft.Text(
-                "💤 Volver a dormir",
+                "Volver a dormir",
                 font_family="btninicio",
                 size=18,
             ),
@@ -119,7 +119,7 @@ class RoomView:
 
         leave_button = ft.ElevatedButton(
             content=ft.Text(
-                "🚪 Intentar salir",
+                "Intentar salir",
                 font_family="btninicio",
                 size=18,
             ),
