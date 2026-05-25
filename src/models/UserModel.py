@@ -5,8 +5,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from database.connection import get_connection
 
-GMAIL_USER = "ivsnachote@gmail.com"
-GMAIL_PASS = "ldfyggacdtdyyqeb"
+GMAIL_USER = "noestoyaqui.soporte@gmail.com"
+GMAIL_PASS = "lype iimh oyej oovt"
 
 
 def register_user(username, email, password):
