@@ -164,4 +164,5 @@ Registro e inicio de sesion para los usuarios.
 ## Etapa 2:
 Recuperacion de contraseña/ cambio de contraseña
 ## Etapa 3:
-Perfil del usuario,
+Perfil del usuario, pantalla principal para jugar, primera pantalla del juego (las demas estan aun en desarrollo) 
+## Etapa 4:
