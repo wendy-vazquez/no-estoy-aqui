@@ -79,6 +79,7 @@ class ProfileView:
                 controls=[
                     ft.Container(height=10),
                     section_title("Progreso actual"),
+                    info_row("Partida", progress.get("save_name") or str(progress["last_save"])[:16]),
                     info_row("Escena actual", progress["current_scene"]),
                     info_row("Nostalgia", progress["nostalgia"]),
                     info_row("Curiosidad", progress["curiosity"]),

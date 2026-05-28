@@ -20,9 +20,13 @@ class MenuView:
 
     def continue_game(self, e):
         from controllers.GameController import GameController
+        from views.ContinueView import ContinueView
+
         controller = GameController(page=self.page, user_id=self.user["id"])
-        controller.load_progress()
-        controller.start_intro()
+        saves = controller.list_saves()
+        self.page.controls.clear()
+        self.page.add(ContinueView(self.page, controller, saves).build())
+        self.page.update()
 
     def settings(self, e):
         from views.ProfileView import ProfileView

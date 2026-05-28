@@ -222,10 +222,12 @@ class RoomView:
             controls=[
 
                 # FONDO
-                ft.Image(
-                    src="img/room1.jpeg",
-                    fit="cover",
+                ft.Container(
                     expand=True,
+                    image=ft.DecorationImage(
+                        src="img/room1.jpeg",
+                        fit="cover",
+                    ),
                 ),
 
                 # OVERLAY

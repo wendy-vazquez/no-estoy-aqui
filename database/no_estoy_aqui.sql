@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `game_progress` (
   `identity_level` int(11) DEFAULT 100,
   `curiosity` int(11) DEFAULT 0,
   `mirror_state` varchar(50) DEFAULT 'normal',
+  `save_name` varchar(100) DEFAULT NULL,
   `last_save` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
