@@ -22,10 +22,10 @@ class IntroView:
     def build(self):
 
         lines = [
-            "Desperte...",
+            "Despertas...",
             "La habitación está silenciosa... Demasiado silenciosa.",
             "No recuerdas haberte dormido.",
-            "Pero algo...",
+            "Pero algo..."
             "se siente diferente.",
         ]
 

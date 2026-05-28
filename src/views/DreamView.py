@@ -9,18 +9,12 @@ class DreamView:
         self.page = page
         self.controller = controller
 
-    # =================================================
     # DESPERTAR
-    # =================================================
-
     def wake_up(self, e):
 
         self.controller.go_to_room()
 
-    # =================================================
     # EXPLORAR SUEÑO
-    # =================================================
-
     def explore_dream(self, e):
 
         dream_messages = [
@@ -37,11 +31,8 @@ class DreamView:
         self.controller.add_fear(1)
 
         self.page.update()
-
-    # =================================================
+        
     # UI
-    # =================================================
-
     def build(self):
 
         title = ft.Text(

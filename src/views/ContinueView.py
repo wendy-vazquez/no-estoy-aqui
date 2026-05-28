@@ -116,7 +116,7 @@ class ContinueView:
                     border_color="#3A3A3A",
                     on_submit=lambda e, sid=save["id"], field=None: self.rename_save(e, sid, field),
                 )
-                # work around closure capture for field
+                # Asignamos el on_submit después de crear el TextField para evitar problemas de referencia circular
                 save_field.on_submit = lambda e, sid=save["id"], field=save_field: self.rename_save(e, sid, field)
 
                 save_items.append(
