@@ -60,49 +60,51 @@ class ContinueView:
         )
 
         save_items = []
-        def close_dialog(e=None):
-            if hasattr(self.page, 'dialog') and self.page.dialog:
-                try:
-                    self.page.dialog.open = False
-                except Exception:
-                    pass
-                self.page.dialog = None
-                self.page.update()
+        # CAMBIO: 2025 — dialog migrado a page.overlay para compatibilidad con Flet moderno
+        def close_dialog(dialog):
+            if dialog in self.page.overlay:
+                self.page.overlay.remove(dialog)
+            self.page.update()
 
         def do_delete(sid):
             ok = self.controller.delete_save(sid)
+            # CAMBIO: 2025 — primero reconstruir la vista, luego mostrar snack_bar
+            # para que el mensaje no se pierda al limpiar page.controls
+            new_saves = self.controller.list_saves()
+            self.page.controls.clear()
+            self.page.add(ContinueView(self.page, self.controller, new_saves).build())
             if ok:
-                # feedback
                 self.page.snack_bar = ft.SnackBar(ft.Text("Partida eliminada."), bgcolor="#004400")
-                self.page.snack_bar.open = True
-                # refresh view with updated saves
-                new_saves = self.controller.list_saves()
-                self.page.controls.clear()
-                self.page.add(ContinueView(self.page, self.controller, new_saves).build())
-                self.page.update()
             else:
                 self.page.snack_bar = ft.SnackBar(ft.Text("No se pudo eliminar la partida."), bgcolor="#660000")
-                self.page.snack_bar.open = True
-                self.page.update()
+            self.page.snack_bar.open = True
+            self.page.update()
 
         def show_delete_dialog(sid):
-            def on_cancel(e):
-                close_dialog(e)
-
-            def on_confirm(e):
-                do_delete(sid)
-                close_dialog(e)
-
+            # CAMBIO: 2025 — botón X en esquina superior derecha para cerrar sin confirmar
             dialog = ft.AlertDialog(
-                title=ft.Text('Eliminar partida'),
-                content=ft.Text('¿Estás seguro? Esta acción no se puede deshacer.'),
+                modal=True,
+                title=ft.Row(
+                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                    controls=[
+                        ft.Text("Eliminar partida"),
+                        ft.IconButton(
+                            icon=ft.Icons.CLOSE,
+                            icon_color="#AAAAAA",
+                            icon_size=18,
+                            tooltip="Cerrar",
+                            on_click=lambda e: close_dialog(dialog),
+                        ),
+                    ],
+                ),
+                content=ft.Text("¿Estás seguro? Esta acción no se puede deshacer."),
                 actions=[
-                    ft.TextButton(content=ft.Text('Cancelar'), on_click=on_cancel),
-                    ft.ElevatedButton(content=ft.Text('Eliminar'), on_click=on_confirm),
+                    ft.TextButton(content=ft.Text("Cancelar"), on_click=lambda e: close_dialog(dialog)),
+                    ft.ElevatedButton(content=ft.Text("Eliminar"), on_click=lambda e, s=sid: [close_dialog(dialog), do_delete(s)]),
                 ],
             )
-            self.page.dialog = dialog
-            self.page.dialog.open = True
+            self.page.overlay.append(dialog)
+            dialog.open = True
             self.page.update()
         if self.saves:
             for save in self.saves:

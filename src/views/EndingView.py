@@ -1,4 +1,7 @@
 import flet as ft
+from views.audio_utils import make_mute_button
+
+# CAMBIO: 2025 — botón mute agregado
 
 
 class EndingView:
@@ -73,9 +76,16 @@ class EndingView:
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )
 
-        return ft.Container(
+        return ft.Stack(
             expand=True,
-            bgcolor="#000000",
-            alignment=ft.Alignment(0, 0),
-            content=content,
+            controls=[
+                ft.Container(
+                    expand=True,
+                    bgcolor="#000000",
+                    alignment=ft.Alignment(0, 0),
+                    content=content,
+                ),
+                # MUTE — CAMBIO: 2025
+                make_mute_button(self.page),
+            ],
         )

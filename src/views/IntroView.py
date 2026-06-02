@@ -1,5 +1,8 @@
 import flet as ft
 import asyncio
+from views.audio_utils import make_mute_button
+
+# CAMBIO: 2025 — botón mute agregado
 
 
 class IntroView:
@@ -187,5 +190,7 @@ class IntroView:
 
                 # UI
                 bottom_ui,
+                # MUTE — CAMBIO: 2025
+                make_mute_button(self.page),
             ],
         )

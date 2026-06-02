@@ -134,15 +134,24 @@ class MenuView:
         )
 
         # MENSAJES RANDOM
+        # CAMBIO: 2025 — se recorren en orden shuffle para que aparezcan todos sin repetir
+        # Se fuerza opacity=0 antes de cambiar el texto para que Flet detecte el cambio y anime
         def random_messages():
+            pool = creepy_messages[:]
             while True:
-                time.sleep(random.randint(6, 12))
-                ghost_message.value = random.choice(creepy_messages)
-                ghost_message.opacity = 1
-                self.page.update()
-                time.sleep(3)
-                ghost_message.opacity = 0
-                self.page.update()
+                random.shuffle(pool)
+                for msg in pool:
+                    time.sleep(random.randint(4, 8))
+                    ghost_message.opacity = 0
+                    self.page.update()
+                    time.sleep(1.2)  # esperar que termine fade-out
+                    ghost_message.value = msg
+                    ghost_message.opacity = 1
+                    self.page.update()
+                    time.sleep(3)
+                    ghost_message.opacity = 0
+                    self.page.update()
+                    time.sleep(1.2)  # esperar que termine fade-out antes del siguiente
 
         threading.Thread(target=random_messages, daemon=True).start()
 

@@ -79,6 +79,12 @@ class GameController:
         self.player_data["current_scene"] = "dream"
         self._navigate(DreamView(page=self.page, controller=self))
 
+    # CAMBIO: 2025 — go_to_sleep agregado para SleepView (viene de RoomView "Volver a dormir")
+    def go_to_sleep(self):
+        from views.SleepView import SleepView
+        self.player_data["current_scene"] = "sleep"
+        self._navigate(SleepView(page=self.page, controller=self))
+
     def go_to_ending(self, ending_type=None):
         from views.EndingView import EndingView
         self.player_data["current_scene"] = "ending"
@@ -94,6 +100,8 @@ class GameController:
             self.go_to_hallways()
         elif scene == "mirror":
             self.go_to_mirror()
+        elif scene == "sleep":
+            self.go_to_sleep()
         elif scene == "dream":
             self.go_to_dream()
         elif scene == "ending":
@@ -301,6 +309,7 @@ class GameController:
 
     # REINICIAR JUEGO
     def reset_game(self):
+        # CAMBIO: 2025 — se limpia save_id para forzar INSERT nuevo en lugar de UPDATE
         self.save_id = None
         self.player_data = {
             "fear": 0,
@@ -311,4 +320,6 @@ class GameController:
             "mirror_state": "normal",
             "save_name": None,
         }
+        # Guardar inmediatamente para que la nueva partida quede registrada en DB
+        self.save_progress()
         self.start_intro()

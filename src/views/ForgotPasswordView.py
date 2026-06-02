@@ -17,9 +17,7 @@ class ForgotPasswordView:
 
         feedback = ft.Text("", size=13, text_align=ft.TextAlign.CENTER)
 
-        # -------------------------
         # PASO 1 — CORREO
-        # -------------------------
         email_field = ft.TextField(
             label="Correo electrónico",
             width=350,
@@ -31,9 +29,7 @@ class ForgotPasswordView:
             bgcolor="#11111199",
         )
 
-        # -------------------------
         # PASO 2 — CÓDIGO + NUEVA CONTRASEÑA
-        # -------------------------
         token_field = ft.TextField(
             label="Código de verificación",
             width=350,

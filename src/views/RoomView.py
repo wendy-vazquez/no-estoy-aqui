@@ -1,5 +1,8 @@
 import flet as ft
 import asyncio
+from views.audio_utils import make_mute_button
+
+# CAMBIO: 2025 — botón mute agregado
 
 
 class RoomView:
@@ -12,7 +15,8 @@ class RoomView:
         self.controller.go_to_mirror()
 
     def go_to_dream(self, e):
-        self.controller.go_to_dream()
+        # CAMBIO: 2025 — "Volver a dormir" ahora va a SleepView en lugar de DreamView
+        self.controller.go_to_sleep()
 
     def go_to_ending(self, e):
         self.controller.go_to_ending()
@@ -238,5 +242,7 @@ class RoomView:
 
                 # UI
                 bottom_ui,
+                # MUTE — CAMBIO: 2025
+                make_mute_button(self.page),
             ],
         )
