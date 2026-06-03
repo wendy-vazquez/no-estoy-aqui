@@ -1,11 +1,6 @@
 import flet as ft
 import pygame
 
-# CAMBIO: 2025 — helper centralizado para el botón de mute/unmute
-# Todas las vistas llaman a make_mute_button() para obtener el botón
-# y lo colocan en top=10, right=10 dentro de un ft.Stack
-
-
 def make_mute_button(page: ft.Page) -> ft.Container:
     """Devuelve un Container posicionado con el botón de mute listo para usar en un Stack."""
 

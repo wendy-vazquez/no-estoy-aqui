@@ -3,11 +3,6 @@ import random
 import asyncio
 from views.audio_utils import make_mute_button
 
-# CAMBIO: 2025 — DreamView rediseñada para seguir la estética de las demás vistas
-# CAMBIO: 2025 — botón mute agregado
-# CAMBIO: 2025 — botón "Despertar" eliminado; esta vista viene desde HallwaysView
-
-
 class DreamView:
 
     def __init__(self, page: ft.Page, controller):
@@ -62,7 +57,7 @@ class DreamView:
         bg = ft.Container(
             expand=True,
             image=ft.DecorationImage(
-                src="img/sueñopasillo.jpeg",
+                src="img/sueñopuerta.jpeg",
                 fit="cover",
             ),
         )
