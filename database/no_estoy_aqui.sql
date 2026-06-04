@@ -70,12 +70,12 @@ CREATE TABLE IF NOT EXISTS `game_progress` (
   `identity_level` int(11) DEFAULT 100,
   `curiosity` int(11) DEFAULT 0,
   `mirror_state` varchar(50) DEFAULT 'normal',
-  `save_name` varchar(100) DEFAULT NULL,
   `last_save` timestamp NOT NULL DEFAULT current_timestamp(),
+  `save_name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `game_progress_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
 
