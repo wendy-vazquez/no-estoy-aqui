@@ -18,6 +18,9 @@ class RoomView:
         # CAMBIO: 2025 — "Volver a dormir" ahora va a SleepView en lugar de DreamView
         self.controller.go_to_sleep()
 
+    def go_to_hallways(self, e):
+        self.controller.go_to_hallways()
+
     def go_to_ending(self, e):
         self.controller.go_to_ending()
 
@@ -131,7 +134,7 @@ class RoomView:
             height=52,
             opacity=0,
             animate_opacity=400,
-            on_click=self.go_to_ending,
+            on_click=self.go_to_hallways,
             color="#FFFFFF",
             bgcolor="#1A1A1AAA",
         )
@@ -242,7 +245,7 @@ class RoomView:
 
                 # UI
                 bottom_ui,
-                # MUTE — CAMBIO: 2025
+                # MUTE
                 make_mute_button(self.page),
             ],
         )

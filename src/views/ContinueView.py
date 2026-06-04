@@ -60,16 +60,15 @@ class ContinueView:
         )
 
         save_items = []
-        # CAMBIO: 2025 — dialog migrado a page.overlay para compatibilidad con Flet moderno
-        def close_dialog(dialog):
-            if dialog in self.page.overlay:
-                self.page.overlay.remove(dialog)
-            self.page.update()
+        def close_dialog():
+            if self.page.dialog is not None:
+                self.page.dialog.open = False
+                self.page.dialog = None
+                self.page.update()
 
         def do_delete(sid):
             ok = self.controller.delete_save(sid)
-            # CAMBIO: 2025 — primero reconstruir la vista, luego mostrar snack_bar
-            # para que el mensaje no se pierda al limpiar page.controls
+            close_dialog()
             new_saves = self.controller.list_saves()
             self.page.controls.clear()
             self.page.add(ContinueView(self.page, self.controller, new_saves).build())
@@ -81,7 +80,9 @@ class ContinueView:
             self.page.update()
 
         def show_delete_dialog(sid):
-            # CAMBIO: 2025 — botón X en esquina superior derecha para cerrar sin confirmar
+            def confirm_delete(e):
+                do_delete(sid)
+
             dialog = ft.AlertDialog(
                 modal=True,
                 title=ft.Row(
@@ -93,17 +94,17 @@ class ContinueView:
                             icon_color="#AAAAAA",
                             icon_size=18,
                             tooltip="Cerrar",
-                            on_click=lambda e: close_dialog(dialog),
+                            on_click=lambda e: close_dialog(),
                         ),
                     ],
                 ),
                 content=ft.Text("¿Estás seguro? Esta acción no se puede deshacer."),
                 actions=[
-                    ft.TextButton(content=ft.Text("Cancelar"), on_click=lambda e: close_dialog(dialog)),
-                    ft.ElevatedButton(content=ft.Text("Eliminar"), on_click=lambda e, s=sid: [close_dialog(dialog), do_delete(s)]),
+                    ft.TextButton(content=ft.Text("Cancelar"), on_click=lambda e: close_dialog()),
+                    ft.ElevatedButton(content=ft.Text("Eliminar"), on_click=confirm_delete),
                 ],
             )
-            self.page.overlay.append(dialog)
+            self.page.dialog = dialog
             dialog.open = True
             self.page.update()
         if self.saves:
@@ -118,7 +119,7 @@ class ContinueView:
                     border_color="#3A3A3A",
                     on_submit=lambda e, sid=save["id"], field=None: self.rename_save(e, sid, field),
                 )
-                # Asignamos el on_submit después de crear el TextField para evitar problemas de referencia circular
+                
                 save_field.on_submit = lambda e, sid=save["id"], field=save_field: self.rename_save(e, sid, field)
 
                 save_items.append(
@@ -214,10 +215,11 @@ class ContinueView:
             controls=[
                 title,
                 description,
-                ft.Divider(color="#333333"),
-                *save_items,
                 ft.Container(height=20),
                 load_buttons,
+                ft.Container(height=20),
+                ft.Divider(color="#333333"),
+                *save_items,
             ],
             spacing=18,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,

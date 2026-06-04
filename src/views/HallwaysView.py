@@ -42,26 +42,34 @@ class HallwaysView:
                 await asyncio.sleep(0.02)
 
     # FASE 1 — avanzar por el pasillo
+    # CAMBIO: 2025 — cambia fondo a pasilloavan.jpeg, "te encontre...."
+    #              luego cambia a fin1.jpeg, "continuara...." y botón reiniciar
     async def advance_animation(self):
         self.phase = 1
         self.advance_button.disabled = True
+        self.listen_button.disabled = True
+        self.bg_image.image = ft.DecorationImage(src="img/pasilloavan.jpeg", fit="cover")
         self.page.update()
         await self.type_text(
             "Das un paso.\n"
-            "El suelo cruje bajo tus pies.\n"
-            "Al fondo del pasillo hay una silueta inmóvil."
+            "La silueta al fondo gira lentamente.\n"
+            "te encontre...."
         )
-        self.controller.add_fear(3)
-        self.controller.add_curiosity(2)
-        # Mostrar botón de puerta
-        self.door_button.visible = True
+        self.controller.add_fear(5)
+        await asyncio.sleep(1.5)
+        # Cambiar a fin1.jpeg y mostrar "continuara...."
+        self.bg_image.image = ft.DecorationImage(src="img/fin1.jpeg", fit="cover")
         self.page.update()
+        await self.type_text("continuara....")
+        self.restart_button.visible = True
+        self.page.update()
+
+    def restart_game(self, e):
+        self.controller.reset_game()
 
     def advance_hallway(self, e):
         self.page.run_task(self.advance_animation)
 
-    # FASE 2 — escuchar el pasillo
-    # CAMBIO: 2025 — al escuchar cambia el fondo a puertas1.jpeg
     async def listen_animation(self):
         self.phase = 2
         self.listen_button.disabled = True
@@ -83,7 +91,7 @@ class HallwaysView:
     def listen_hallway(self, e):
         self.page.run_task(self.listen_animation)
 
-    # FASE 3 — entrar por la puerta (va al sueño)
+    #entrar por la puerta (va al sueño)
     def enter_door(self, e):
         self.controller.go_to_dream()
 
@@ -180,6 +188,17 @@ class HallwaysView:
             bgcolor="#1A003AAA",
         )
 
+        # BOTÓN REINICIAR — oculto, aparece tras el final del pasillo
+        self.restart_button = ft.ElevatedButton(
+            content=ft.Text("Volver al inicio", font_family="btninicio", size=18),
+            width=240,
+            height=52,
+            visible=False,
+            on_click=self.restart_game,
+            color="#FFFFFF",
+            bgcolor="#1A1A1AAA",
+        )
+
         # BOTÓN VOLVER
         back_button = ft.ElevatedButton(
             content=ft.Text("Volver", font_family="btninicio", size=18),
@@ -210,6 +229,7 @@ class HallwaysView:
                             self.listen_button,
                             self.door_button,
                             back_button,
+                            self.restart_button,
                         ],
                         wrap=True,
                         spacing=15,

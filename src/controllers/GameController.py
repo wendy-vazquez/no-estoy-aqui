@@ -92,6 +92,11 @@ class GameController:
             ending_type = self._calculate_ending()
         self._navigate(EndingView(page=self.page, controller=self, ending_type=ending_type))
 
+    # CAMBIO: 2025 — go_to_credits usa _navigate como el resto de vistas
+    def go_to_credits(self):
+        from views.CreditsView import CreditsView
+        self._navigate(CreditsView(page=self.page, controller=self))
+
     def resume_game(self):
         scene = self.player_data.get("current_scene", "intro")
         if scene == "room":

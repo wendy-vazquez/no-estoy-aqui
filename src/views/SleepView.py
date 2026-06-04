@@ -8,6 +8,8 @@ class SleepView:
     def __init__(self, page: ft.Page, controller):
         self.page = page
         self.controller = controller
+        # CAMBIO: 2025 — contador de hundidas; tras 3 muestra mensaje final y solo deja despertar
+        self.sink_count = 0
 
         self.sleep_messages = [
             "Cierras los ojos y el cuarto desaparece.",
@@ -37,12 +39,23 @@ class SleepView:
 
     # HUNDIRSE MÁS EN EL SUEÑO
     async def sink_animation(self):
+        self.sink_count += 1
         self.sink_button.disabled = True
+        self.bg_image.image = ft.DecorationImage(
+            src="img/seguircaida.jpeg",
+            fit="cover",
+        )
         self.page.update()
-        await self.type_text(random.choice(self.sleep_messages))
+
+        if self.sink_count >= 3:
+            await self.type_text("Ya no hay nada más.")
+            self.sink_button.visible = False
+        else:
+            await self.type_text(random.choice(self.sleep_messages))
+            self.sink_button.disabled = False
+
         self.controller.add_nostalgia(2)
         self.controller.reduce_identity(1)
-        self.sink_button.disabled = False
         self.wake_button.visible = True
         self.page.update()
 
@@ -57,10 +70,10 @@ class SleepView:
     def build(self):
 
         # FONDO
-        bg = ft.Container(
+        self.bg_image = ft.Container(
             expand=True,
             image=ft.DecorationImage(
-                src="img/sueño1.jpeg",
+                src="img/caida1.jpeg",
                 fit="cover",
             ),
         )
@@ -176,7 +189,7 @@ class SleepView:
             expand=True,
             controls=[
                 # FONDO
-                bg,
+                self.bg_image,
                 # OVERLAY
                 ft.Container(expand=True, bgcolor="#000000AA"),
                 # UI
